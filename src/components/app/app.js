@@ -14,7 +14,7 @@ const App = ({RestoService}) => {
         <div style={{background: `url(${Background}) center center/cover no-repeat`}} className="app">
             <AppHeader total={50}/>
             <Switch>
-                <Route path='/menu/' exact component={MainPage}/>
+                <Route path='/' exact component={MainPage}/>
                 <Route path='/cart-page/' exact component={CartPage}/>
             </Switch>
         </div>
