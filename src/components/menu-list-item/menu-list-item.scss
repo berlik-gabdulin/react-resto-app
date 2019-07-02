@@ -29,6 +29,28 @@
             font-weight: 700;
         }
     }
+    &__category {
+        span {
+            &:before {
+                display: inline-block;
+                margin-right: 5px;
+                content: '';
+                width: 30px;
+                height: 30px;
+                background-size: cover;
+                transform: translateY(10px);
+            }
+            &.salads:before {
+                background-image: url(/img/salad.png);
+            }
+            &.pizza:before {
+                background-image: url(/img/pizza.png);
+            }
+            &.meat:before {
+                background-image: url(/img/steak.png);
+            }
+        }
+    }
     &__btn {
         width: 150px;
         height: 40px;
