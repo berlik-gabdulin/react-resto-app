@@ -11,7 +11,7 @@ import './menu-list.scss';
 class MenuList extends Component {
 
     componentDidMount() {
-        const { RestoService, menuLoaded, menuItems, menuRequested, menuCatchedError, error } = this.props;
+        const { RestoService, menuLoaded, menuRequested, menuCatchedError, error } = this.props;
 
         console.log('Mount error - ', error);
 
@@ -29,7 +29,7 @@ class MenuList extends Component {
         const { menuItems, loading, error } = this.props;
 
         const itemsList = menuItems.map(menuItem => {
-            return <MenuListItem key={menuItem.id} menuItem={menuItem} somparam={menuItem.id}/>
+            return <MenuListItem key={menuItem.id} menuItem={menuItem} />
         })
         const errorMessage = error ? <Error /> : null;
         const spinner = loading ? <Spinner /> : null;
