@@ -1,19 +1,24 @@
 import React from 'react';
 import './menu-list-item.scss';
+import {withRouter} from 'react-router-dom';
+import { menuLoaded, menuRequested, menuCatchedError, menuItemSelected } from '../../actions';
+import { connect } from 'net';
 
 const MenuListItem = ({menuItem}) => {
+
+    // const {menuItemSelected} = this.props;
 
     const {title, price, url, category, id} = menuItem;
     
     const onItemSelected = (id) => {
-        console.log(id);
+        console.log(id)
     }
  
     return (
         <li className="menu__item" id={id}>
             <div
                 className="menu__title"
-                onClick={() => onItemSelected(id)
+                onClick={() => onItemSelected(this)
                 }>
                 {title}
             </div>
@@ -25,4 +30,20 @@ const MenuListItem = ({menuItem}) => {
     )
 }
 
-export default MenuListItem;
+const mapStateToProps = (state) => {
+    return {
+        menuItems: state.menu,
+        loading: state.loading,
+        error: state.error
+    }
+}
+
+const mapDispatchToProps = {
+    menuLoaded,
+    menuRequested,
+    menuCatchedError,
+    menuItemSelected
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuListItem);

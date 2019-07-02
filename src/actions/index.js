@@ -16,9 +16,15 @@ const menuCatchedError = () => {
         error: true
     }
 }
+const menuItemSelected = () => {
+    return {
+        type: 'MENU_ITEM_CLICKED',
+    }
+}
 
 export {
     menuLoaded,
     menuRequested,
-    menuCatchedError
+    menuCatchedError,
+    menuItemSelected
 };

@@ -1,17 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import WithRestoService from '../hoc';
+import MenuListItem from '../menu-list-item';
 import {withRouter} from 'react-router-dom';
 
-const MenuListItemPage = () => {
+class MenuListItemPage extends Component {
+
+    componentDidMount() {
+        const { RestoService, menuLoaded, menuRequested, menuCatchedError, menuItemSelected, error } = this.props;
+        console.log('Props', this.props);
+
+        RestoService.getMenuItems()
+            .then(res => {
+                res.map(res => {
+                    console.log(res);
+                })
+            });
+    }
 
     
-    // const {title, price, url, category} = menuItem;
- 
-    return (
-        <div className="menu__item">
-            asdasd
-        </div>
-    )
+
+    render() {
+        return (
+            <>
+                Hello
+                <MenuListItem/>
+            </>
+        )
+    }
 }
 
-export default WithRestoService()(withRouter(MenuListItemPage));
+const mapStateToProps = (state) => {
+    return {
+        menuItems: state.menu,
+        loading: state.loading,
+        error: state.error
+    }
+}
+
+export default WithRestoService()(connect(mapStateToProps)(withRouter(MenuListItemPage)));

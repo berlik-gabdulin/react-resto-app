@@ -19,11 +19,17 @@ const reducer = (state = initialState, action) => {
                 loading: true,
                 error: false
             };
-        case 'MENU_CATCHED_ERROR': 
+        case 'MENU_CATCHED_ERROR':
             return {
                 menu: state.menu,
                 loading: action.loading,
                 error: action.error
+            };
+        case 'MENU_ITEM_CLICKED':
+            return {
+                menu: action.menu,
+                loading: state.loading,
+                error: state.error
             };
         default:
             return state;
