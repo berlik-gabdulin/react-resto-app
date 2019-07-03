@@ -16,8 +16,12 @@ class MenuListItemPage extends Component {
 
         menuRequested();
 
-        RestoService.getMenuItem(menuListItemId)
+        RestoService.getMenuItems()
             .then(res => {
+                res = res.filter((item) => {
+                    return item.id == menuListItemId
+                });
+                console.log('selectedItem', res);
                 menuLoaded(res);
             })
             .catch(() => {
@@ -30,9 +34,11 @@ class MenuListItemPage extends Component {
     
     render() {
         const { menuItems, loading, error } = this.props;
+
+        const currentItem = menuItems.map((menuItem) => {return menuItem});
         
         const View = () => {
-            const {title, price, url, category} = menuItems;
+            const {title, price, url, category} = currentItem[0];
             return <>
                 <div className="menu__item" >
                     <div className="menu__title">{title}</div>

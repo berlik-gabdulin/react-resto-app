@@ -11,7 +11,7 @@ const MenuListItem = ({menuItem, menuItemSelected, history}) => {
     const {title, price, url, category, id} = menuItem;
     
     const onItemSelected = (id) => {
-        menuItemSelected(id);
+        // menuItemSelected(id);
     }
  
     return (
