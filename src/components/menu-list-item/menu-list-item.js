@@ -4,21 +4,20 @@ import {withRouter} from 'react-router-dom';
 import { menuLoaded, menuRequested, menuCatchedError, menuItemSelected } from '../../actions';
 import { connect } from 'react-redux';
 
-const MenuListItem = ({menuItem, menuItemSelected, menuItems, history}) => {
+const MenuListItem = ({menuItem, menuItemSelected, history}) => {
     
-    console.log(menuItems);
+    // console.log(menuItem);
 
     const {title, price, url, category, id} = menuItem;
     
     const onItemSelected = (id) => {
-        menuItems.map
+        menuItemSelected(id);
     }
  
     return (
         <li className="menu__item" id={id}>
             <div
                 className="menu__title"
-                menuItem={menuItem}
                 onClick={() => {
                     onItemSelected(id);
                     history.push(`/menu/${id}/`);

@@ -8,12 +8,14 @@ const reducer = (state = initialState, action) => {
     console.log('Prev state', state);
     switch (action.type) {
         case 'MENU_LOADED': 
+        console.log('loaded', action.payload);
             return {
                 menu: action.payload,
                 loading: false,
                 error: false
             };
         case 'MENU_REQUESTED': 
+        console.log('request', state.menu);
             return {
                 menu: state.menu,
                 loading: true,
@@ -26,7 +28,6 @@ const reducer = (state = initialState, action) => {
                 error: action.error
             };
         case 'MENU_ITEM_SELECTED':
-            console.log('action.id', action.id);
             return {
                 menu: action.payload,
                 loading: state.loading,
