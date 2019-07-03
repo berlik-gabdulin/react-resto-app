@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 // import MenuListItem from '../menu-list-item';
-import { menuLoaded, menuRequested, menuCatchedError, menuItemSelected } from '../../actions';
+import { menuLoaded, menuRequested, menuCatchedError, addedToCart } from '../../actions';
 import Spinner from '../spinner';
 import Error from '../error';
 
@@ -19,9 +19,8 @@ class MenuListItemPage extends Component {
         RestoService.getMenuItems()
             .then(res => {
                 res = res.filter((item) => {
-                    return item.id == menuListItemId
+                    return item.id === Number(menuListItemId)
                 });
-                console.log('selectedItem', res);
                 menuLoaded(res);
             })
             .catch(() => {
@@ -33,7 +32,7 @@ class MenuListItemPage extends Component {
     }
     
     render() {
-        const { menuItems, loading, error } = this.props;
+        const { menuItems, loading,  error } = this.props;
 
         const currentItem = menuItems.map((menuItem) => {return menuItem});
         
@@ -77,6 +76,6 @@ const mapDispatchToProps = {
     menuLoaded,
     menuRequested,
     menuCatchedError,
-    menuItemSelected
+    addedToCart
 };
 export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(withRouter(MenuListItemPage)));

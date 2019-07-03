@@ -1,38 +1,91 @@
 const initialState = {
     menu: [],
     loading: true,
-    error: false
+    error: false,
+    items: [],
+    total: 0,
 }
 
 const reducer = (state = initialState, action) => {
-    console.log('Prev state', state);
     switch (action.type) {
         case 'MENU_LOADED': 
-        console.log('loaded', action.payload);
             return {
+                ...state,
                 menu: action.payload,
                 loading: false,
                 error: false
             };
         case 'MENU_REQUESTED': 
-        console.log('request', state.menu);
             return {
-                menu: state.menu,
-                loading: true,
-                error: false
+                ...state
             };
         case 'MENU_CATCHED_ERROR':
             return {
-                menu: state.menu,
+                ...state,
                 loading: action.loading,
                 error: action.error
             };
-        case 'MENU_ITEM_SELECTED':
+        case 'ITEM_ADD_TO_CART':
+            const id = action.payload;
+            const item = state.menu.find(item => item.id === id);
+            const cartItem = state.items.find(item => item.id === id);
+
+            const newItemsState = () => {
+                if (cartItem) {
+                    
+                    const currentItemIndex = state.items.findIndex(item => item.id === id);
+
+                    cartItem.count++;
+
+                    const newCartItem = {
+                        title: cartItem.title,
+                        price: cartItem.price,
+                        url: cartItem.url,
+                        id: cartItem.id,
+                        total: cartItem.total + cartItem.price,
+                        count: cartItem.count
+                    }
+
+                    let itemsState = [
+                        ...state.items.slice(0, currentItemIndex),
+                        newCartItem,
+                        ...state.items.slice(currentItemIndex + 1)
+                    ];
+                    return itemsState;
+                } else if (!cartItem) {
+                    const newItem = {
+                        title: item.title,
+                        price: item.price,
+                        url: item.url,
+                        id: item.id,
+                        total: item.price,
+                        count: 1
+                    };                    
+                    let itemsState = [
+                        ...state.items,
+                        newItem
+                    ];
+                    return itemsState;
+                }
+            }
+            
             return {
-                menu: action.payload,
-                loading: state.loading,
-                error: state.error
+                ...state,
+                items: newItemsState(),
+                total: state.total + item.price
             };
+        case 'ITEM_REMOVE_FROM_CART':
+            const idx = action.payload;
+            const cartRemoveItems = state.items.find(item => item.id === idx);
+            const itemIndex = state.items.findIndex(item => item.id === idx);
+            return {
+                ...state,
+                items: [
+                    ...state.items.slice(0, itemIndex),
+                    ...state.items.slice(itemIndex + 1)
+                ],
+                total: Number(state.total) - Number(cartRemoveItems.total)
+            }
         default:
             return state;
     }

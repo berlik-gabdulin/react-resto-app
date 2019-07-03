@@ -3,29 +3,41 @@ const menuLoaded = (newMenu) => {
         type: 'MENU_LOADED',
         payload: newMenu
     }
-}
+};
+
 const menuRequested = () => {
     return {
         type: 'MENU_REQUESTED'
     }
-}
+};
+
 const menuCatchedError = () => {
     return {
         type: 'MENU_CATCHED_ERROR',
         loading: false,
         error: true
     }
-}
-const menuItemSelected = (currentItem) => {
+};
+
+const addedToCart = (id) => {
     return {
-        type: 'MENU_ITEM_SELECTED',
-        payload: currentItem
+        type: 'ITEM_ADD_TO_CART',
+        payload: id
     }
-}
+};
+
+const deleteFromCart = (id) => {
+    return {
+        type: 'ITEM_REMOVE_FROM_CART',
+        payload: id
+    }
+};
+
 
 export {
     menuLoaded,
     menuRequested,
     menuCatchedError,
-    menuItemSelected
+    addedToCart,
+    deleteFromCart
 };

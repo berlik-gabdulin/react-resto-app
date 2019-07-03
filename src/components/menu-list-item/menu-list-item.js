@@ -1,17 +1,16 @@
 import React from 'react';
 import './menu-list-item.scss';
 import {withRouter} from 'react-router-dom';
-import { menuLoaded, menuRequested, menuCatchedError, menuItemSelected } from '../../actions';
+import { menuLoaded, menuRequested, menuCatchedError, addedToCart } from '../../actions';
 import { connect } from 'react-redux';
 
-const MenuListItem = ({menuItem, menuItemSelected, history}) => {
+const MenuListItem = ({menuItem, onAddToCart, history}) => {
     
-    // console.log(menuItem);
 
     const {title, price, url, category, id} = menuItem;
     
     const onItemSelected = (id) => {
-        // menuItemSelected(id);
+        console.log(id);
     }
  
     return (
@@ -28,7 +27,7 @@ const MenuListItem = ({menuItem, menuItemSelected, history}) => {
             <img className="menu__img" src={url} alt={title}></img>
             <div className="menu__category">Category: <span className={category}>{category}</span></div>
             <div className="menu__price">Price: <span>{price}$</span></div>
-            <button className="menu__btn">Add to cart</button>
+            <button onClick={() => onAddToCart()} className="menu__btn">Add to cart</button>
         </li>
     )
 }
@@ -45,7 +44,7 @@ const mapDispatchToProps = {
     menuLoaded,
     menuRequested,
     menuCatchedError,
-    menuItemSelected
+    addedToCart
 };
 
 
