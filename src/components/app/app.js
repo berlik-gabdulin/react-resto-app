@@ -13,7 +13,7 @@ const App = () => {
             <Switch>
                 <Route path='/' exact component={MainPage} />
                 <Route path='/cart' exact component={CartPage} />
-                <Route path='/:id' render={
+                <Route path='/menu/:id' render={
                     ({ match }) => {
                         const { id } = match.params;
                         return <MenuListItemPage menuListItemId={id} />

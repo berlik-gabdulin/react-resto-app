@@ -25,9 +25,10 @@ const reducer = (state = initialState, action) => {
                 loading: action.loading,
                 error: action.error
             };
-        case 'MENU_ITEM_CLICKED':
+        case 'MENU_ITEM_SELECTED':
+            console.log('action.id', action.id);
             return {
-                menu: action.menu,
+                menu: action.payload,
                 loading: state.loading,
                 error: state.error
             };

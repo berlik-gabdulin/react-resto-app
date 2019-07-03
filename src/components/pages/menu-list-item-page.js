@@ -1,35 +1,34 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import WithRestoService from '../hoc';
 import MenuListItem from '../menu-list-item';
 import {withRouter} from 'react-router-dom';
+import { menuLoaded, menuRequested, menuCatchedError, menuItemSelected } from '../../actions';
+import { connect } from 'react-redux';
 
-class MenuListItemPage extends Component {
+const MenuListItemPage = ({RestoService, menuListItemId, menuLoaded, menuItems}) => {
 
-    componentDidMount() {
-        const { RestoService, menuLoaded, menuRequested, menuCatchedError, menuItemSelected, error } = this.props;
-        console.log('Props', this.props);
+    // console.log(menuListItemId);
 
-        RestoService.getMenuItems()
-            .then(res => {
-                res.map(res => {
-                    console.log(res);
-                })
-            });
-    }
-
+    RestoService.getMenuItems()
+            .then(res => menuLoaded(res));
     
-
-    render() {
-        return (
-            <>
-                Hello
-                <MenuListItem/>
-            </>
-        )
-    }
+    const {title, price, url, category, id} = menuItems[menuListItemId + 1];
+ 
+    return (
+        <>
+            <li className="menu__item" id={id}>
+            <div
+                className="menu__title">
+                {title}
+            </div>
+            <img className="menu__img" src={url} alt={title}></img>
+            <div className="menu__category">Category: <span className={category}>{category}</span></div>
+            <div className="menu__price">Price: <span>{price}$</span></div>
+            <button className="menu__btn">Add to cart</button>
+        </li>
+        </>
+    )
 }
-
 const mapStateToProps = (state) => {
     return {
         menuItems: state.menu,
@@ -37,5 +36,10 @@ const mapStateToProps = (state) => {
         error: state.error
     }
 }
-
-export default WithRestoService()(connect(mapStateToProps)(withRouter(MenuListItemPage)));
+const mapDispatchToProps = {
+    menuLoaded,
+    menuRequested,
+    menuCatchedError,
+    menuItemSelected
+};
+export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(withRouter(MenuListItemPage)));

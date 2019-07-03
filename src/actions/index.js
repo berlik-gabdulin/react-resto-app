@@ -16,9 +16,10 @@ const menuCatchedError = () => {
         error: true
     }
 }
-const menuItemSelected = () => {
+const menuItemSelected = (currentItem) => {
     return {
-        type: 'MENU_ITEM_CLICKED',
+        type: 'MENU_ITEM_SELECTED',
+        payload: currentItem
     }
 }
 

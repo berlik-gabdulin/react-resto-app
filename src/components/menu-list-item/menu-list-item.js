@@ -2,23 +2,27 @@ import React from 'react';
 import './menu-list-item.scss';
 import {withRouter} from 'react-router-dom';
 import { menuLoaded, menuRequested, menuCatchedError, menuItemSelected } from '../../actions';
-import { connect } from 'net';
+import { connect } from 'react-redux';
 
-const MenuListItem = ({menuItem}) => {
-
-    // const {menuItemSelected} = this.props;
+const MenuListItem = ({menuItem, menuItemSelected, menuItems, history}) => {
+    
+    console.log(menuItems);
 
     const {title, price, url, category, id} = menuItem;
     
     const onItemSelected = (id) => {
-        console.log(id)
+        menuItems.map
     }
  
     return (
         <li className="menu__item" id={id}>
             <div
                 className="menu__title"
-                onClick={() => onItemSelected(this)
+                menuItem={menuItem}
+                onClick={() => {
+                    onItemSelected(id);
+                    history.push(`/menu/${id}/`);
+                    }
                 }>
                 {title}
             </div>
@@ -46,4 +50,4 @@ const mapDispatchToProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MenuListItem);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MenuListItem));
