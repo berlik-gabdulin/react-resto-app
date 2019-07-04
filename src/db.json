@@ -227,6 +227,20 @@
       ],
       "amount": "151$",
       "id": 7
+    },
+    {
+      "order": [
+        {
+          "title": "Pizza Napoletana",
+          "price": 13,
+          "url": "https://www.pizzanapoletana.org/struttura/pagine_bicolor/mobile/decalogo_avpn_1.jpg",
+          "id": 3,
+          "total": 39,
+          "count": 3
+        }
+      ],
+      "amount": "39$",
+      "id": 8
     }
   ]
 }
