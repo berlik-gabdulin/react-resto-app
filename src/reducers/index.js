@@ -4,6 +4,7 @@ const initialState = {
     error: false,
     items: [],
     total: 0,
+    orderIsSuccess: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -90,7 +91,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 items: [],
-                total: 0
+                total: 0,
+                orderIsSuccess: true
             };
         default:
             return state;

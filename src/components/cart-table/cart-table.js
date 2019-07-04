@@ -7,16 +7,17 @@ import './cart-table.scss';
 
 const CartTable = ({items, deleteFromCart, orderConfirmed, total, RestoService}) => {
     
+    const cartStatus = (total > 0) ? 'Cart is empty :(' : 'Your order:';
     const confirmBtn = (total > 0) ? <button onClick={() => onConfirm()} className="menu__btn menu__btn--confirm">Confirm</button> : null;
 
     const onConfirm = () => {
-        RestoService.postOrder(items);
-        orderConfirmed()
+        RestoService.postOrder(items, total);
+        orderConfirmed();
     }
  
     return (
         <>
-            <div className="cart__title">Ваш заказ:</div>
+            <div className="cart__title">{cartStatus}</div>
             <div className="cart__list">
                 {
                     items.map(item => {
