@@ -14,7 +14,15 @@ export default class RestoService {
         return await this.getResource(`/menu/`);
     }
 
-    async getMenuItem(id) {
-        return await this.getResource(`/menu/${id}`);
+    async postOrder(order) {
+        fetch(`${this._apiBase}/orders/`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                order: order,
+            })
+        });
     }
 }

@@ -10,18 +10,13 @@ const MenuListItem = ({menuItem, onAddToCart, history}) => {
     const {title, price, url, category, id} = menuItem;
     
     const onItemSelected = (id) => {
-        console.log(id);
+        history.push(`/menu/${id}/`);
     }
  
     return (
         <li className="menu__item" id={id}>
-            <div
-                className="menu__title"
-                onClick={() => {
-                    onItemSelected(id);
-                    history.push(`/menu/${id}/`);
-                    }
-                }>
+            <div className="menu__title"
+                onClick={() => onItemSelected(id)}>
                 {title}
             </div>
             <img className="menu__img" src={url} alt={title}></img>

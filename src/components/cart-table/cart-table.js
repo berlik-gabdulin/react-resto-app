@@ -1,10 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {deleteFromCart} from '../../actions';
+import {deleteFromCart, orderConfirmed} from '../../actions';
+import WithRestoService from '../hoc';
 
 import './cart-table.scss';
 
-const CartTable = ({items, deleteFromCart}) => {
+const CartTable = ({items, deleteFromCart, orderConfirmed, total, RestoService}) => {
+    
+    const confirmBtn = (total > 0) ? <button onClick={() => onConfirm()} className="menu__btn menu__btn--confirm">Confirm</button> : null;
+
+    const onConfirm = () => {
+        RestoService.postOrder(items);
+        orderConfirmed()
+    }
+ 
     return (
         <>
             <div className="cart__title">Ваш заказ:</div>
@@ -23,17 +32,20 @@ const CartTable = ({items, deleteFromCart}) => {
                     })
                 }
             </div>
+            {confirmBtn}
         </>
     );
 };
 
-const mapStateToProps = ({items}) => {
+const mapStateToProps = ({items, total}) => {
     return {
-        items
+        items,
+        total
     }
 }
 const mapDispatchToProps = {
-    deleteFromCart
+    deleteFromCart,
+    orderConfirmed
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartTable);
+export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(CartTable));

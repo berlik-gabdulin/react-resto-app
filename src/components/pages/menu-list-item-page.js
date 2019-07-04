@@ -10,7 +10,6 @@ import Error from '../error';
 
 class MenuListItemPage extends Component {
 
-    
     componentDidMount() {
         const {RestoService, menuListItemId, menuLoaded, menuCatchedError, menuRequested} = this.props;
 
@@ -32,19 +31,19 @@ class MenuListItemPage extends Component {
     }
     
     render() {
-        const { menuItems, loading,  error } = this.props;
+        const { menuItems, loading,  error, addedToCart } = this.props;
 
         const currentItem = menuItems.map((menuItem) => {return menuItem});
         
         const View = () => {
-            const {title, price, url, category} = currentItem[0];
+            const {title, price, url, category, id} = currentItem[0];
             return <>
                 <div className="menu__item" >
                     <div className="menu__title">{title}</div>
                     <img className="menu__img" src={url} alt={title}></img>
                     <div className="menu__category">Category: <span className={category}>{category}</span></div>
                     <div className="menu__price">Price: <span>{price}$</span></div>
-                    <button className="menu__btn">Add to cart</button>
+                    <button onClick={() => addedToCart(id)} className="menu__btn">Add to cart</button>
                 </div>
                 </>
         }

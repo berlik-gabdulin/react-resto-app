@@ -60,5 +60,9 @@
         color: #fff;
         font-size: 16px;
         cursor: pointer;
+        &--confirm {
+            display: block;
+            margin: 30px auto;
+        }
     }
 }

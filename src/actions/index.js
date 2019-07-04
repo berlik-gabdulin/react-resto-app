@@ -33,11 +33,18 @@ const deleteFromCart = (id) => {
     }
 };
 
+const orderConfirmed = () => {
+    return {
+        type: 'ORDER_CONFIRM'
+    }
+};
+
 
 export {
     menuLoaded,
     menuRequested,
     menuCatchedError,
     addedToCart,
-    deleteFromCart
+    deleteFromCart,
+    orderConfirmed
 };

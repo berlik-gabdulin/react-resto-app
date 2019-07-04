@@ -60,7 +60,7 @@ const reducer = (state = initialState, action) => {
                         id: item.id,
                         total: item.price,
                         count: 1
-                    };                    
+                    };
                     let itemsState = [
                         ...state.items,
                         newItem
@@ -86,6 +86,12 @@ const reducer = (state = initialState, action) => {
                 ],
                 total: Number(state.total) - Number(cartRemoveItems.total)
             }
+        case 'ORDER_CONFIRM':
+            return {
+                ...state,
+                items: [],
+                total: 0
+            };
         default:
             return state;
     }
